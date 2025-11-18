@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:our_market_admin/core/functions/build_appbar.dart';
+import 'package:our_market_admin/feature/widget/widgets/custom_elevated_btn.dart';
 import 'package:our_market_admin/feature/widget/widgets/custom_text_field.dart';
 
 class LoginView extends StatefulWidget {
@@ -41,7 +42,22 @@ class _LoginViewState extends State<LoginView> {
                     CustomTextFormField(
                       labelText: 'Password',
                       controller: passwordController,
+                      isSecured: isPasswordHidden,
+                      suffIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isPasswordHidden = !isPasswordHidden;
+                          });
+                        },
+                        icon: Icon(
+                          isPasswordHidden
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                      ),
                     ),
+                    SizedBox(height: 30),
+                    CustomEBtn(text: 'Login', onTap: () {}),
                   ],
                 ),
               ),
