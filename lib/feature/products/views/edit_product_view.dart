@@ -4,9 +4,20 @@ import 'package:our_market_admin/core/components/custom_elevated_button.dart';
 import 'package:our_market_admin/core/components/custom_text_field.dart';
 import 'package:our_market_admin/core/functions/build_appbar.dart';
 
-class EditView extends StatelessWidget {
+class EditView extends StatefulWidget {
   const EditView({super.key});
 
+  @override
+  State<EditView> createState() => _EditViewState();
+}
+
+class _EditViewState extends State<EditView> {
+  String selectedValue = 'Electronics';
+  String sale = '10';
+  final TextEditingController _productNameController = TextEditingController();
+  final TextEditingController _newPriceController = TextEditingController();
+  final TextEditingController _oldPriceController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +31,30 @@ class EditView extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    DropdownMenu(
+                      initialSelection: selectedValue,
+                      onSelected: (value) {
+                        setState(() {
+                          selectedValue = value ?? 'Collections';
+                        });
+                      },
+                      dropdownMenuEntries: [
+                        DropdownMenuEntry(value: 'Sports', label: 'Sports'),
+                        DropdownMenuEntry(
+                          value: 'Electronics',
+                          label: 'Electronics',
+                        ),
+                        DropdownMenuEntry(
+                          value: 'Collections',
+                          label: 'Collections',
+                        ),
+                        DropdownMenuEntry(value: 'Books', label: 'Books'),
+                      ],
+                    ),
+                    SizedBox(width: 10),
                     Column(
                       children: [
-                        Text('SALE'),
+                        Text('$sale %'),
                         SizedBox(height: 10),
                         Text('10 %'),
                       ],
@@ -50,17 +82,51 @@ class EditView extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 10),
-                CustomTextFormField(labelText: 'New Price'),
-                CustomTextFormField(labelText: 'Old Sale'),
-                CustomTextFormField(labelText: 'Product Name'),
-                CustomTextFormField(labelText: ' Description'),
+                CustomTextFormField(
+                  labelText: 'New Price',
+                  controller: _newPriceController,
+                ),
+                SizedBox(height: 10),
+
+                CustomTextFormField(
+                  labelText: 'Old Sale',
+                  controller: _oldPriceController,
+                ),
+                SizedBox(height: 10),
+
+                CustomTextFormField(
+                  labelText: 'Product Name',
+                  controller: _productNameController,
+                ),
+                SizedBox(height: 10),
+
+                CustomTextFormField(
+                  labelText: ' Description',
+                  controller: _descriptionController,
+                ),
                 SizedBox(height: 30),
-                CustomElevatedButton(child: Text('Update'), onPressed: () {}),
+                CustomElevatedButton(
+                  child: Text('Update'),
+                  onPressed: () {},
+                  width: 150,
+                  height: 150,
+                ),
+                SizedBox(height: 30),
               ],
             ),
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _productNameController.dispose();
+    _oldPriceController.dispose();
+    _newPriceController.dispose();
+    _descriptionController.dispose();
+
+    super.dispose();
   }
 }
