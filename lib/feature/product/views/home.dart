@@ -29,7 +29,7 @@ class HomeView extends StatelessWidget {
                   Icon(Icons.shopping_bag, size: 30),
                 ],
               ),
-              onPressed: () => navigateTo(context, const ProductViewAdmin()),
+              onPressed: () => navigateTo(context, ProductViewAdmin()),
             ),
             CustomElevatedButton(
               width: MediaQuery.of(context).size.width * 0.3,

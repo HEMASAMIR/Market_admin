@@ -5,7 +5,7 @@ import 'package:our_market_admin/core/functions/build_appbar.dart';
 import 'package:our_market_admin/core/functions/navigate_to.dart';
 import 'package:our_market_admin/feature/auth/widget/widgets/custom_elevated_btn.dart';
 import 'package:our_market_admin/feature/auth/widget/widgets/custom_text_field.dart';
-import 'package:our_market_admin/feature/home/views/home.dart';
+import 'package:our_market_admin/feature/product/views/home.dart';
 
 class LoginView extends StatefulWidget {
   // final UserDataModel user
