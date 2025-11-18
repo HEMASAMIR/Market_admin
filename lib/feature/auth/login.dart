@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:our_market_admin/core/functions/build_appbar.dart';
-import 'package:our_market_admin/feature/widget/widgets/custom_elevated_btn.dart';
-import 'package:our_market_admin/feature/widget/widgets/custom_text_field.dart';
+import 'package:our_market_admin/core/functions/navigate_to.dart';
+import 'package:our_market_admin/feature/auth/widget/widgets/custom_elevated_btn.dart';
+import 'package:our_market_admin/feature/auth/widget/widgets/custom_text_field.dart';
+import 'package:our_market_admin/feature/home/views/home.dart';
 
 class LoginView extends StatefulWidget {
   // final UserDataModel user
@@ -20,7 +24,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildCustomAppBar(context, 'Login As Admin', isCallBack: false),
+      appBar: buildCustomAppBar(context, 'Login As Admin', isBackButton: false),
       body: SingleChildScrollView(
         child: SizedBox(
           height: MediaQuery.of(context).size.height - kToolbarHeight,
@@ -57,7 +61,13 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ),
                     SizedBox(height: 30),
-                    CustomEBtn(text: 'Login', onTap: () {}),
+                    CustomEBtn(
+                      text: 'Login',
+                      onTap: () {
+                        log('Login');
+                        navigateTo(context, HomeView());
+                      },
+                    ),
                   ],
                 ),
               ),
