@@ -3,8 +3,9 @@ import 'package:our_market_admin/core/components/custom_elevated_button.dart';
 import 'package:our_market_admin/core/functions/build_appbar.dart';
 
 import 'package:our_market_admin/core/functions/navigate_to.dart';
-import 'package:our_market_admin/feature/product/views/add_admin.dart';
-import 'package:our_market_admin/feature/product/views/product.dart';
+import 'package:our_market_admin/feature/add_product/views/add_product.dart';
+import 'package:our_market_admin/feature/products/views/add_admin.dart';
+import 'package:our_market_admin/feature/products/views/product.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -47,7 +48,9 @@ class HomeView extends StatelessWidget {
                   Icon(Icons.add_circle_outline, size: 30),
                 ],
               ),
-              onPressed: () {},
+              onPressed: () {
+                navigateTo(context, AddProduct());
+              },
             ),
             CustomElevatedButton(
               width: MediaQuery.of(context).size.width * 0.3,

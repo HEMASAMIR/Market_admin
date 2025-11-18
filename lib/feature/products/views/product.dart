@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:our_market_admin/feature/product/views/widget/custom_product_card.dart';
+import 'package:our_market_admin/feature/products/views/widget/custom_product_card.dart';
 
 class ProductViewAdmin extends StatelessWidget {
   const ProductViewAdmin({super.key});
