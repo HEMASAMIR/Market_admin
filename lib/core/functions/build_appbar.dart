@@ -5,6 +5,7 @@ AppBar buildCustomAppBar(
   String title, {
   String? returnValue,
   bool isCallBack = true,
+  required bool isBackButton,
 }) {
   return AppBar(
     centerTitle: true,

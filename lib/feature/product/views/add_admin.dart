@@ -5,15 +5,16 @@ import 'package:our_market_admin/core/functions/navigate_to.dart';
 import 'package:our_market_admin/core/components/custom_text_field.dart';
 import 'package:our_market_admin/feature/home/views/home.dart';
 
-class LoginView extends StatefulWidget {
+class AddAdmin extends StatefulWidget {
   // final UserDataModel user
-  const LoginView({super.key});
+  const AddAdmin({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<AddAdmin> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _LoginViewState extends State<AddAdmin> {
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -22,7 +23,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildCustomAppBar(context, 'Login As Admin', isBackButton: false),
+      appBar: buildCustomAppBar(context, 'Add Admin', isBackButton: false),
       body: SingleChildScrollView(
         child: SizedBox(
           height: MediaQuery.of(context).size.height - kToolbarHeight,
@@ -37,6 +38,12 @@ class _LoginViewState extends State<LoginView> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CustomTextFormField(
+                      labelText: 'Name',
+                      controller: emailController,
+                    ),
+                    const SizedBox(height: 20),
+
+                    CustomTextFormField(
                       labelText: 'Email',
                       controller: emailController,
                     ),
@@ -47,10 +54,8 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     SizedBox(height: 20),
                     CustomElevatedButton(
-                      child: const Text('Login'),
-                      onPressed: () {
-                        navigateTo(context, HomeView());
-                      },
+                      child: const Text('Add Admin'),
+                      onPressed: () {},
                     ),
                   ],
                 ),
