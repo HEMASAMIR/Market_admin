@@ -5,10 +5,7 @@ class ApiServices {
   final Dio _dio = Dio(
     BaseOptions(
       baseUrl: SupabaseKeys.supabaseUrl,
-      headers: {
-        "apiKey": SupabaseKeys.anonKey,
-        "Authorization": "Bearer ${SupabaseKeys.anonKey}",
-      },
+      headers: {"apiKey": SupabaseKeys.anonKey},
     ),
   );
 
@@ -28,18 +25,18 @@ class ApiServices {
     return await _dio.delete(path);
   }
 
-  //Create Account
+  // Create Account
   final Dio _dioAuth = Dio(
     BaseOptions(
-      baseUrl: 'https://sultixrmcetqmixvtkbi.supabase.co/auth/v1',
-
+      baseUrl: 'https://sultixrmcetqmixvtkbi.supabase.co/auth/v1/',
       headers: {
         "Content-Type": "application/json",
-        "apiKey": SupabaseKeys.anonKey,
+        "apiKey": SupabaseKeys.anonKey, // بدون Bearer
       },
     ),
   );
-  Future<Response> craeteAccount(
+
+  Future<Response> createAccount(
     String endPoint,
     Map<String, dynamic> data,
   ) async {
