@@ -42,4 +42,13 @@ class ApiServices {
   ) async {
     return await _dioAuth.post(endPoint, data: data);
   }
+
+  //LOGIN
+  Future<Response> login(String endpoint, Map<String, dynamic> data) async {
+    return await _dioAuth.post(
+      endpoint,
+      data: data,
+      queryParameters: {"grant_type": "password"},
+    );
+  }
 }

@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:our_market_admin/core/components/cache_image.dart';
 import 'package:our_market_admin/core/components/custom_elevated_button.dart';
 import 'package:our_market_admin/core/components/custom_text_field.dart';
 import 'package:our_market_admin/core/functions/build_appbar.dart';
+import 'package:our_market_admin/core/functions/shared_pref.dart';
 
 class EditView extends StatefulWidget {
   const EditView({super.key});
@@ -107,7 +110,10 @@ class _EditViewState extends State<EditView> {
                 SizedBox(height: 30),
                 CustomElevatedButton(
                   child: Text('Update'),
-                  onPressed: () {},
+                  onPressed: () async {
+                    String? token = await SharedPref.getToken();
+                    log('Token  ======= :  $token');
+                  },
                   width: 150,
                   height: 150,
                 ),

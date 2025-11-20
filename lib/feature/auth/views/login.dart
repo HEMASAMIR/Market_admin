@@ -1,26 +1,22 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:our_market_admin/core/app_colors.dart';
 import 'package:our_market_admin/core/components/custom_elevated_button.dart';
-import 'package:our_market_admin/core/components/custom_text_field.dart';
 import 'package:our_market_admin/core/functions/build_appbar.dart';
 import 'package:our_market_admin/core/functions/custom_snacK_bar.dart';
-import 'package:our_market_admin/core/functions/navigate_to.dart';
-import 'package:our_market_admin/feature/add_admin/cubit/addadmin_cubit/AddAdmin_cubit.dart';
-import 'package:our_market_admin/feature/add_admin/cubit/addadmin_cubit/AddAdmin_state.dart';
-import 'package:our_market_admin/feature/auth/views/login.dart';
+import 'package:our_market_admin/core/components/custom_text_field.dart';
+import 'package:our_market_admin/core/functions/navigate_without_back.dart';
+import 'package:our_market_admin/feature/auth/cubit/cubit/login_cubit.dart';
+import 'package:our_market_admin/feature/home/views/home.dart';
 
-// Helper functions for fancy snackbars
-
-class AddAdmin extends StatefulWidget {
-  const AddAdmin({super.key});
+class LoginView extends StatefulWidget {
+  // final UserDataModel user
+  const LoginView({super.key});
 
   @override
-  State<AddAdmin> createState() => _AddAdminState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
-class _AddAdminState extends State<AddAdmin> {
+class _LoginViewState extends State<LoginView> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -29,21 +25,22 @@ class _AddAdminState extends State<AddAdmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildCustomAppBar(context, 'Add Admin', isBackButton: false),
+      appBar: buildCustomAppBar(context, 'Login As Admin', isBackButton: false),
       body: BlocProvider(
-        create: (_) => AddAdminCubit(),
-        child: BlocConsumer<AddAdminCubit, AddAdminState>(
+        create: (context) => LoginCubit(),
+        child: BlocConsumer<LoginCubit, LoginState>(
           listener: (context, state) {
-            if (state is AddAdminSuccess) {
-              showSuccessSnackBar(context, 'Admin added successfully');
-              navigateTo(context, LoginView());
-            } else if (state is AddAdminFailure) {
-              showErrorSnackBar(context, state.errorMessage);
+            if (state is LoginSuccess) {
+              showSuccessSnackBar(context, 'Login Successful');
+              navigateWithoutBack(context, HomeView());
+            }
+            if (state is LoginError) {
+              showErrorSnackBar(context, state.msgError);
             }
           },
           builder: (context, state) {
-            AddAdminCubit cubit = context.read<AddAdminCubit>();
-            return state is AddAdminLoading
+            LoginCubit cubit = context.read<LoginCubit>();
+            return state is LoginLoading
                 ? const Center(child: CircularProgressIndicator())
                 : SingleChildScrollView(
                   child: SizedBox(
@@ -54,7 +51,9 @@ class _AddAdminState extends State<AddAdmin> {
                         child: Form(
                           key: _formKey,
                           child: Column(
-                            mainAxisSize: MainAxisSize.min,
+                            mainAxisSize:
+                                MainAxisSize
+                                    .min, // مهم عشان الفورم ياخد مساحة محتواه فقط
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               CustomTextFormField(
@@ -63,31 +62,30 @@ class _AddAdminState extends State<AddAdmin> {
                               ),
                               const SizedBox(height: 20),
                               CustomTextFormField(
-                                labelText: 'Password',
                                 isSecured: isPasswordHidden,
                                 suffIcon: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      isPasswordHidden = !isPasswordHidden;
-                                    });
-                                  },
                                   icon: Icon(
                                     isPasswordHidden
                                         ? Icons.visibility_off
                                         : Icons.visibility,
                                   ),
+                                  onPressed: () {
+                                    setState(() {
+                                      isPasswordHidden = !isPasswordHidden;
+                                    });
+                                  },
                                 ),
+                                labelText: 'Password',
                                 controller: passwordController,
                               ),
-                              const SizedBox(height: 20),
+                              SizedBox(height: 20),
                               CustomElevatedButton(
-                                child: const Text('Add Admin'),
+                                child: const Text('Login'),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                    cubit.craeteAccount({
-                                      'email': emailController.text.trim(),
-                                      'password':
-                                          passwordController.text.trim(),
+                                    cubit.login({
+                                      "email": emailController.text,
+                                      "password": passwordController.text,
                                     });
                                   }
                                 },
