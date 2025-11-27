@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:our_market_admin/feature/home/views/home.dart';
-import 'package:our_market_admin/feature/auth/views/login.dart';
+import 'package:our_market_admin/feature/home/view/home.dart';
 
 void main() {
   runApp(const OurMarketAdmin());
@@ -15,7 +14,7 @@ class OurMarketAdmin extends StatelessWidget {
       title: 'Our Market Admin',
 
       debugShowCheckedModeBanner: false,
-      home: LoginView(),
+      home: HomeView(),
     );
   }
 }

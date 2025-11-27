@@ -7,6 +7,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.labelText,
     this.suffIcon,
     this.isSecured = false,
+    this.onChanged,
     this.keyboardType,
     this.controller,
   });
@@ -15,11 +16,13 @@ class CustomTextFormField extends StatelessWidget {
   final bool isSecured;
   final TextInputType? keyboardType;
   final TextEditingController? controller;
+  final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       obscureText: isSecured,
+      onChanged: onChanged,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return "This Field is Required";

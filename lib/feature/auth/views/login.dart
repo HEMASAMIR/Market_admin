@@ -6,7 +6,7 @@ import 'package:our_market_admin/core/functions/custom_snacK_bar.dart';
 import 'package:our_market_admin/core/components/custom_text_field.dart';
 import 'package:our_market_admin/core/functions/navigate_without_back.dart';
 import 'package:our_market_admin/feature/auth/cubit/cubit/login_cubit.dart';
-import 'package:our_market_admin/feature/home/views/home.dart';
+import 'package:our_market_admin/feature/home/view/home.dart';
 
 class LoginView extends StatefulWidget {
   // final UserDataModel user
